@@ -141,10 +141,10 @@
             //console.log(location)
             // Make the HQ the center of the map
 
-            var center_map;    
+            var center_map;
             for (i = 0; i < location.length; i += 1) {
                 if (location[i].type === 'HeadQuarters') {
-                    center_map = {lat: location[i].latitude, lng: location[i].longitude};
+                    center_map = { lat: location[i].latitude, lng: location[i].longitude };
                 }
             }
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -155,55 +155,26 @@
             // Creating the marker pins for the locations
             var marker;
             for (i = 0; i < location.length; i += 1) {
-                marker = new google.maps.Marker({position: {lat: location[i].latitude, lng: location[i].longitude}, map: map});
+                marker = new google.maps.Marker({ position: { lat: location[i].latitude, lng: location[i].longitude }, map: map });
+
+                if (location[i].type === 'Distribution Facility') { marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/red-circle.png'); }
+                else if (location[i].type === 'RetailLocation') { marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'); }
+                else if (location[i].type === 'Call Center') { marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/blu-circle.png'); }
+                else if (location[i].type === 'HeadQuarters') { marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/wht-circle.png'); }
+
+                var circle = new google.maps.Circle({
+                    strokeColor: '#64967d',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1,
+                    fillColor: '#b0ecf4',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: { lat: location[i].latitude, lng: location[i].longitude },
+                    radius: Math.sqrt(location[i].$revenue) * 2
+                });
+
             }
 
-            //     var marker = "";
-
-            //     for (var i = 0; i < 15; i++) {
-            //         marker = new google.maps.Marker({
-            //             position: uluru[i][0],
-            //             animation: google.maps.Animation.DROP,
-            //             map: map
-            //         });
-            //         if (i < 11) {
-            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-            //         }
-            //         else if (i == 11) {
-            //             marker.setIcon(pinSymbol("#FFF"));
-            //         }
-            //         else if (i == 12) {
-            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
-            //         }
-            //         else if (i == 13 || i == 14) {
-
-            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-            //         }
-            //     }
-
-            //     for (i = 0; i < 11; i++) {
-            //         var circle = new google.maps.Circle({
-            //             strokeColor: '#64967d',
-            //             strokeOpacity: 0.8,
-            //             strokeWeight: 1,
-            //             fillColor: '#b0ecf4',
-            //             fillOpacity: 0.35,
-            //             map: map,
-            //             center: uluru[i][0],
-            //             radius: Math.sqrt(uluru[i][1]) * 2
-            //         });
-            //     }
-            // }
-
-            // function pinSymbol(color) {
-            //     return {
-            //         path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
-            //         fillColor: color,
-            //         fillOpacity: 1,
-            //         strokeColor: '#000',
-            //         strokeWeight: 2,
-            //         scale: 1,
-            //     };
         }
 
 
