@@ -1,19 +1,216 @@
+<!DOCTYPE html>
 <html>
 
-<body>
-    <div id="m" style="width:402px;height:433px;background:green"></div>
-    <script>
-        function sample() {
-            var m1 = {
-                center: new google.maps.LatLng(52.3, -0.14),
-                zoom: 13,
-                mapss: google.maps.MapTypeId.HYBRID
-            }
-            var m2 = new google.maps.Map(document.getElementById("m"), m1);
+<head>
+    <style>
+        #map {
+            height: 1000px;
         }
+    </style>
+</head>
+
+<body>
+    <h1>MyCo on Google Maps</h1>
+    <div id="map"></div>
+    <script>
+        function g_map() {
+
+            const location = [
+                {
+                    "id": "0001",
+                    "type": "RetailLocation",
+                    "address": "Fremont, CA 94538",
+                    "latitude": 37.542571,
+                    "longitude": -121.993037,
+                    "$revenue": 10000000
+                },
+                {
+                    "id": "0002",
+                    "type": "RetailLocation",
+                    "address": "Newark, CA",
+                    "latitude": 37.525400,
+                    "longitude": -122.037764,
+                    "$revenue": 3000000
+                },
+                {
+                    "id": "0003",
+                    "type": "RetailLocation",
+                    "address": "4100-4198 Pleiades Pl,Union City, CA 94587",
+                    "latitude": 37.587546,
+                    "longitude": -122.066716,
+                    "$revenue": 120000000
+                },
+                {
+                    "id": "0004",
+                    "type": "RetailLocation",
+                    "address": "4100-4198 Pleiades Pl,Union City, CA 94587",
+                    "latitude": 37.587546,
+                    "longitude": -122.066716,
+                    "$revenue": 120000000
+                },
+                {
+                    "id": "0005",
+                    "type": "RetailLocation",
+                    "address": "Burbank,Hayward, CA",
+                    "latitude": 37.660284,
+                    "longitude": -122.089396,
+                    "$revenue": 5000000
+                },
+                {
+                    "id": "0006",
+                    "type": "Distribution Facility",
+                    "address": "Sugarloaf San Mateo, CA",
+                    "latitude": 37.527798,
+                    "longitude": -122.312989,
+                    "$revenue": 300000
+                },
+                {
+                    "id": "0007",
+                    "type": "RetailLocation",
+                    "address": "San Carlos, CA",
+                    "latitude": 37.492686,
+                    "longitude": -122.249346,
+                    "$revenue": 3002000
+                },
+                {
+                    "id": "0008",
+                    "type": "RetailLocation",
+                    "address": "Santa Cruz County CA",
+                    "latitude": 37.007888,
+                    "longitude": -122.067355,
+                    "$revenue": 88999090
+                },
+                {
+                    "id": "0009",
+                    "type": "RetailLocation",
+                    "address": "Santa Clara County CA",
+                    "latitude": 37.113164,
+                    "longitude": -121.651485,
+                    "$revenue": 88999090
+                },
+                {
+                    "id": "0010",
+                    "type": "Distribution Facility",
+                    "address": "Santa Cruz County CA",
+                    "latitude": 37.006852,
+                    "longitude": -122.064148,
+                    "$revenue": 1000000
+                },
+                {
+                    "id": "0011",
+                    "type": "Call Center",
+                    "address": "Santa Clara, CA",
+                    "latitude": 37.344717,
+                    "longitude": -121.979666,
+                    "$revenue": 1000000
+                },
+                {
+                    "id": "0012",
+                    "type": "RetailLocation",
+                    "address": "Pleasanton, CA",
+                    "latitude": 37.638625,
+                    "longitude": -121.911430,
+                    "$revenue": 1000000
+                },
+                {
+                    "id": "0013",
+                    "type": "HeadQuarters",
+                    "address": "Mission District San Francisco, CA",
+                    "latitude": 37.753038,
+                    "longitude": -122.423198,
+                    "$revenue": 1000000
+                },
+                {
+                    "id": "0014",
+                    "type": "RetailLocation",
+                    "address": "Pacifica, CA",
+                    "latitude": 37.594870,
+                    "longitude": -122.473562,
+                    "$revenue": 50000
+                },
+                {
+                    "id": "0015",
+                    "type": "RetailLocation",
+                    "address": "Gilroy, CA",
+                    "latitude": 36.995174,
+                    "longitude": -121.602745,
+                    "$revenue": 50000
+                }
+            ];
+
+            //console.log(location)
+            // Make the HQ the center of the map
+
+            var center_map;    
+            for (i = 0; i < location.length; i += 1) {
+                if (location[i].type === 'HeadQuarters') {
+                    center_map = {lat: location[i].latitude, lng: location[i].longitude};
+                }
+            }
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: center_map
+            });
+
+            // Creating the marker pins for the locations
+            var marker;
+            for (i = 0; i < location.length; i += 1) {
+                marker = new google.maps.Marker({position: {lat: location[i].latitude, lng: location[i].longitude}, map: map});
+            }
+
+            //     var marker = "";
+
+            //     for (var i = 0; i < 15; i++) {
+            //         marker = new google.maps.Marker({
+            //             position: uluru[i][0],
+            //             animation: google.maps.Animation.DROP,
+            //             map: map
+            //         });
+            //         if (i < 11) {
+            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+            //         }
+            //         else if (i == 11) {
+            //             marker.setIcon(pinSymbol("#FFF"));
+            //         }
+            //         else if (i == 12) {
+            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+            //         }
+            //         else if (i == 13 || i == 14) {
+
+            //             marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+            //         }
+            //     }
+
+            //     for (i = 0; i < 11; i++) {
+            //         var circle = new google.maps.Circle({
+            //             strokeColor: '#64967d',
+            //             strokeOpacity: 0.8,
+            //             strokeWeight: 1,
+            //             fillColor: '#b0ecf4',
+            //             fillOpacity: 0.35,
+            //             map: map,
+            //             center: uluru[i][0],
+            //             radius: Math.sqrt(uluru[i][1]) * 2
+            //         });
+            //     }
+            // }
+
+            // function pinSymbol(color) {
+            //     return {
+            //         path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z M -2,-30 a 2,2 0 1,1 4,0 2,2 0 1,1 -4,0',
+            //         fillColor: color,
+            //         fillOpacity: 1,
+            //         strokeColor: '#000',
+            //         strokeWeight: 2,
+            //         scale: 1,
+            //     };
+        }
+
+
     </script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=sample"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDcPwALh103uGlDrdPVD2xcKmA7BY5Weo&callback=g_map">
+        </script>
 </body>
 
 </html>
