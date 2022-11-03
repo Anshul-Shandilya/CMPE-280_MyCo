@@ -163,11 +163,11 @@
                 else if (location[i].type === 'HeadQuarters') { marker.setIcon('http://maps.google.com/mapfiles/kml/paddle/wht-circle.png'); }
 
                 var circle = new google.maps.Circle({
-                    strokeColor: '#64967d',
-                    strokeOpacity: 0.8,
+                    strokeColor: '#fdfdfd',
+                    strokeOpacity: 1,
                     strokeWeight: 1,
-                    fillColor: '#b0ecf4',
-                    fillOpacity: 0.35,
+                    fillColor: '#000000',
+                    fillOpacity: 0.40,
                     map: map,
                     center: { lat: location[i].latitude, lng: location[i].longitude },
                     radius: Math.sqrt(location[i].$revenue) * 2
